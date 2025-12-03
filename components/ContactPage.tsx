@@ -29,14 +29,19 @@ export const ContactPage: React.FC = () => {
   const labelClasses = "block text-xs uppercase tracking-widest text-brand-orange mb-2 font-bold";
 
   return (
-    <div className="min-h-screen bg-brand-dark text-white relative overflow-x-hidden font-body pt-32 pb-20">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen bg-brand-dark text-white relative overflow-x-hidden font-body pt-32 pb-20"
+    >
       {/* Noise Texture Overlay */}
       <div className="fixed inset-0 bg-noise pointer-events-none z-0 mix-blend-overlay opacity-30" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 md:px-6">
-        
+
         {/* Header Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -46,7 +51,7 @@ export const ContactPage: React.FC = () => {
             <CompoundIcon className="w-3 h-3 text-brand-orange" />
             <span className="text-xs font-mono text-brand-orange uppercase tracking-wider">Get in Touch</span>
           </div>
-          
+
           <h1 className="font-display font-bold text-4xl md:text-6xl mb-6 leading-tight tracking-tight">
             Send us a message
           </h1>
@@ -78,7 +83,7 @@ export const ContactPage: React.FC = () => {
                   placeholder="Enter your full name"
                   className={inputClasses}
                   value={formState.name}
-                  onChange={(e) => setFormState({...formState, name: e.target.value})}
+                  onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                 />
               </div>
               <div className="group">
@@ -89,7 +94,7 @@ export const ContactPage: React.FC = () => {
                   placeholder="name@company.com"
                   className={inputClasses}
                   value={formState.email}
-                  onChange={(e) => setFormState({...formState, email: e.target.value})}
+                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                 />
               </div>
             </div>
@@ -102,7 +107,7 @@ export const ContactPage: React.FC = () => {
                 placeholder="What is this regarding?"
                 className={inputClasses}
                 value={formState.subject}
-                onChange={(e) => setFormState({...formState, subject: e.target.value})}
+                onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
               />
             </div>
 
@@ -114,7 +119,7 @@ export const ContactPage: React.FC = () => {
                 placeholder="Tell us more about your inquiry..."
                 className={`${inputClasses} resize-none`}
                 value={formState.message}
-                onChange={(e) => setFormState({...formState, message: e.target.value})}
+                onChange={(e) => setFormState({ ...formState, message: e.target.value })}
               />
             </div>
 
@@ -141,6 +146,6 @@ export const ContactPage: React.FC = () => {
         </motion.div>
 
       </div>
-    </div>
+    </motion.div>
   );
 };

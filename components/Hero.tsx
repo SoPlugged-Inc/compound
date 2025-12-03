@@ -2,10 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-
-interface HeroProps {
-  onNavigate: (view: 'home' | 'eligibility' | 'about' | 'application') => void;
-}
+import { Link } from 'react-router-dom';
 
 const ColumnBackground = () => (
   <div className="absolute inset-0 z-0 flex w-full h-full pointer-events-none opacity-20">
@@ -45,13 +42,13 @@ const StaggeredText: React.FC<StaggeredTextProps> = ({ text, className, delay = 
   )
 }
 
-export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
+export const Hero: React.FC = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-6 pt-20 md:pt-0 bg-brand-dark">
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-6 pt-24 md:pt-20 pb-20 bg-brand-dark">
       <ColumnBackground />
 
       {/* Background Atmospheric Elements */}
@@ -75,7 +72,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         {/* Marquee Headline with Alpha Mask */}
         <div className="w-full overflow-hidden mb-8 md:mb-12 flex flex-col gap-2 md:gap-4 pointer-events-none relative">
           <div className="absolute inset-0 z-10 bg-gradient-to-r from-brand-dark via-transparent to-brand-dark w-full h-full pointer-events-none" />
-          
+
           {/* Row 1: GROWTH (Scrolls Left) */}
           <div className="flex whitespace-nowrap mask-linear-fade">
             <motion.div
@@ -89,11 +86,11 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               }}
             >
               {[...Array(8)].map((_, i) => (
-                <StaggeredText 
-                  key={`growth-${i}`} 
-                  text="GROWTH" 
+                <StaggeredText
+                  key={`growth-${i}`}
+                  text="GROWTH"
                   delay={0.5}
-                  className="font-display font-extrabold text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter text-white" 
+                  className="font-display font-extrabold text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter text-white"
                 />
               ))}
             </motion.div>
@@ -136,21 +133,21 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full sm:w-auto px-4"
         >
-          <button
-            onClick={() => onNavigate('eligibility')}
+          <Link
+            to="/eligibility"
             className="group relative px-8 py-4 bg-brand-orange overflow-hidden w-full sm:w-auto flex justify-center rounded-none"
           >
             <div className="absolute inset-0 w-full h-full bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
             <span className="relative font-bold text-white uppercase tracking-widest flex items-center gap-2">
               Check Eligibility <ArrowRight className="w-4 h-4" />
             </span>
-          </button>
-          <button
-            onClick={() => onNavigate('about')}
+          </Link>
+          <Link
+            to="/about"
             className="text-white/60 hover:text-white uppercase tracking-widest text-sm font-medium transition-colors border-b border-transparent hover:border-brand-orange pb-1"
           >
             Explore the Journey
-          </button>
+          </Link>
         </motion.div>
       </div>
 

@@ -2,10 +2,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Clock, ArrowRight, AlertCircle, Sparkles, Target, User, Zap, Plus, Minus } from 'lucide-react';
-
-interface EligibilityPageProps {
-  onNavigate: (view: 'home' | 'eligibility' | 'application') => void;
-}
+import { useNavigate } from 'react-router-dom';
 
 const CriteriaCard = ({ icon: Icon, title, items, index }: { icon: any, title: string, items: string[], index: number }) => (
   <motion.div
@@ -17,7 +14,7 @@ const CriteriaCard = ({ icon: Icon, title, items, index }: { icon: any, title: s
     <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
       <span className="font-mono text-xs text-brand-orange">0{index + 1}</span>
     </div>
-    
+
     <div className="mb-6 flex items-center gap-4">
       <div className="p-3 bg-brand-dark border border-white/10 group-hover:border-brand-orange/50 transition-colors">
         <Icon className="w-6 h-6 text-brand-orange" />
@@ -40,7 +37,7 @@ const ProcessStep = ({ number, title, duration, description }: { number: number,
   <div className="relative pl-12 md:pl-16 py-8 group">
     {/* Vertical Line */}
     <div className="absolute left-[19px] md:left-[27px] top-0 bottom-0 w-px bg-white/10 group-hover:bg-brand-orange/50 transition-colors" />
-    
+
     {/* Node */}
     <div className="absolute left-0 md:left-2 top-8 w-10 h-10 md:w-12 md:h-12 bg-brand-dark border border-brand-orange text-brand-orange flex items-center justify-center font-display font-bold text-lg z-10 group-hover:scale-110 transition-transform duration-300">
       {number}
@@ -61,7 +58,7 @@ const EligibilityFaqItem: React.FC<{ question: string, answer: string }> = ({ qu
 
   return (
     <div className="border-b border-white/10">
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left group hover:bg-white/5 px-4 transition-colors"
       >
@@ -91,7 +88,8 @@ const EligibilityFaqItem: React.FC<{ question: string, answer: string }> = ({ qu
   );
 };
 
-export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) => {
+export const EligibilityPage: React.FC = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'criteria' | 'process' | 'faq'>('criteria');
 
   const faqs = [
@@ -120,15 +118,20 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
       answer: "No. Funding is not guaranteed. We provide the network and opportunities to pitch to investors and access capital, but investment decisions are made independently by our partners."
     },
     {
-        question: "Can I reapply if I'm not accepted the first time?",
-        answer: "Absolutely. We encourage founders to continue building and reapply once they have hit more traction milestones."
+      question: "Can I reapply if I'm not accepted the first time?",
+      answer: "Absolutely. We encourage founders to continue building and reapply once they have hit more traction milestones."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-brand-dark text-white relative overflow-x-hidden font-body">
-       {/* Noise Texture Overlay */}
-       <div className="fixed inset-0 bg-noise pointer-events-none z-0 mix-blend-overlay opacity-30" />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen bg-brand-dark text-white relative overflow-x-hidden font-body"
+    >
+      {/* Noise Texture Overlay */}
+      <div className="fixed inset-0 bg-noise pointer-events-none z-0 mix-blend-overlay opacity-30" />
 
       {/* Hero Section - Adjusted padding to clear global fixed header */}
       <section className="relative z-10 px-4 md:px-6 pt-32 pb-16 md:pt-40 md:pb-24 max-w-5xl mx-auto text-center">
@@ -141,14 +144,14 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
             Not every brand is ready for <br className="hidden md:block" />
             Compound and <span className="text-brand-orange">that’s the point.</span>
           </h1>
-          
+
           <div className="flex flex-col items-center gap-6">
             <div className="h-px w-24 bg-brand-orange/50" />
             <p className="text-lg md:text-2xl text-white/60 max-w-3xl mx-auto font-light leading-relaxed">
               While our membership is designed for early-stage consumer brands, our value is in the quality of the network.
             </p>
-             <button 
-              onClick={() => onNavigate('application')}
+            <button
+              onClick={() => navigate('/application')}
               className="mt-4 inline-flex items-center justify-center px-8 py-4 bg-brand-orange text-white font-bold uppercase tracking-widest hover:bg-white hover:text-brand-dark transition-all duration-300 rounded-none group"
             >
               Start your Application
@@ -165,15 +168,14 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab as any)}
-                className={`relative px-8 py-6 text-sm font-bold uppercase tracking-widest transition-colors whitespace-nowrap ${
-                  activeTab === tab ? 'text-brand-dark' : 'text-white/40 hover:text-white'
-                }`}
+                className={`relative px-8 py-6 text-sm font-bold uppercase tracking-widest transition-colors whitespace-nowrap ${activeTab === tab ? 'text-brand-dark' : 'text-white/40 hover:text-white'
+                  }`}
               >
                 <span className="relative z-10">
-                    {tab === 'criteria' ? 'The Criteria' : tab === 'process' ? 'The Protocol' : 'FAQ'}
+                  {tab === 'criteria' ? 'The Criteria' : tab === 'process' ? 'The Protocol' : 'FAQ'}
                 </span>
                 {activeTab === tab && (
-                  <motion.div 
+                  <motion.div
                     layoutId="activeTab"
                     className="absolute inset-0 bg-brand-cream"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
@@ -188,10 +190,10 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
       {/* Content Area */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pb-32">
         <AnimatePresence mode="wait">
-          
+
           {/* CRITERIA TAB */}
           {activeTab === 'criteria' && (
-            <motion.div 
+            <motion.div
               key="criteria"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -219,7 +221,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
 
                 {/* Right Column: The Grid */}
                 <div className="grid grid-cols-1 gap-6">
-                  <CriteriaCard 
+                  <CriteriaCard
                     index={0}
                     icon={Clock}
                     title="Commitment"
@@ -230,7 +232,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
                       "Committed to long-term building"
                     ]}
                   />
-                   <CriteriaCard 
+                  <CriteriaCard
                     index={1}
                     icon={Target}
                     title="Product-Market Fit"
@@ -241,7 +243,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
                       "Clear understanding of target market"
                     ]}
                   />
-                   <CriteriaCard 
+                  <CriteriaCard
                     index={2}
                     icon={Zap}
                     title="Growth Potential"
@@ -252,7 +254,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
                       "Clear vision for expansion"
                     ]}
                   />
-                   <CriteriaCard 
+                  <CriteriaCard
                     index={3}
                     icon={User}
                     title="Founder Mindset"
@@ -282,7 +284,7 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
 
           {/* PROCESS TAB */}
           {activeTab === 'process' && (
-            <motion.div 
+            <motion.div
               key="process"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -292,76 +294,76 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                 <div>
-                   <h2 className="font-display font-bold text-3xl md:text-5xl mb-12 text-white">The Sequence</h2>
-                   <div className="space-y-0">
-                    <ProcessStep 
-                      number={1} 
-                      title="Initial Application" 
+                  <h2 className="font-display font-bold text-3xl md:text-5xl mb-12 text-white">The Sequence</h2>
+                  <div className="space-y-0">
+                    <ProcessStep
+                      number={1}
+                      title="Initial Application"
                       duration="5-10 MINS"
                       description="Complete our comprehensive application form with your background, goals, and motivations."
                     />
-                    <ProcessStep 
-                      number={2} 
-                      title="Application Review" 
+                    <ProcessStep
+                      number={2}
+                      title="Application Review"
                       duration="3-5 DAYS"
                       description="Our team reviews your application against our membership criteria and program fit."
                     />
-                    <ProcessStep 
-                      number={3} 
-                      title="Interview Process" 
+                    <ProcessStep
+                      number={3}
+                      title="Interview Process"
                       duration="45-60 MINS"
                       description="Selected candidates participate in a video interview to discuss goals and program alignment."
                     />
-                    <ProcessStep 
-                      number={4} 
-                      title="Program Matching" 
+                    <ProcessStep
+                      number={4}
+                      title="Program Matching"
                       duration="1-2 DAYS"
                       description="We match accepted candidates with the most suitable program track and mentor."
                     />
-                     <ProcessStep 
-                      number={5} 
-                      title="Onboarding" 
+                    <ProcessStep
+                      number={5}
+                      title="Onboarding"
                       duration="1 WEEK"
                       description="Welcome to the community! Complete onboarding and begin your Compound cohort journey."
                     />
-                   </div>
+                  </div>
                 </div>
 
                 <div className="md:pt-32">
                   <div className="sticky top-32 p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
-                     <div className="flex items-center gap-3 mb-6">
-                       <Sparkles className="w-5 h-5 text-brand-orange" />
-                       <h3 className="font-display font-bold text-xl text-white uppercase">The Interview</h3>
-                     </div>
-                     
-                     <div className="space-y-8">
-                        <div>
-                          <h4 className="font-mono text-xs text-brand-orange uppercase tracking-widest mb-3 border-b border-white/10 pb-2">Discussion Vector</h4>
-                          <ul className="space-y-2 text-sm text-white/60">
-                            <li>• Business background & current state</li>
-                            <li>• Entrepreneurial goals</li>
-                            <li>• Motivation for Compound</li>
-                            <li>• Commitment capability</li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h4 className="font-mono text-xs text-brand-orange uppercase tracking-widest mb-3 border-b border-white/10 pb-2">Prep Data</h4>
-                          <ul className="space-y-2 text-sm text-white/60">
-                            <li>• Review program structure</li>
-                            <li>• Success metrics</li>
-                            <li>• Community expectations</li>
-                          </ul>
-                        </div>
-                     </div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <Sparkles className="w-5 h-5 text-brand-orange" />
+                      <h3 className="font-display font-bold text-xl text-white uppercase">The Interview</h3>
+                    </div>
+
+                    <div className="space-y-8">
+                      <div>
+                        <h4 className="font-mono text-xs text-brand-orange uppercase tracking-widest mb-3 border-b border-white/10 pb-2">Discussion Vector</h4>
+                        <ul className="space-y-2 text-sm text-white/60">
+                          <li>• Business background & current state</li>
+                          <li>• Entrepreneurial goals</li>
+                          <li>• Motivation for Compound</li>
+                          <li>• Commitment capability</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-mono text-xs text-brand-orange uppercase tracking-widest mb-3 border-b border-white/10 pb-2">Prep Data</h4>
+                        <ul className="space-y-2 text-sm text-white/60">
+                          <li>• Review program structure</li>
+                          <li>• Success metrics</li>
+                          <li>• Community expectations</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </motion.div>
           )}
 
-           {/* FAQ TAB */}
-           {activeTab === 'faq' && (
-            <motion.div 
+          {/* FAQ TAB */}
+          {activeTab === 'faq' && (
+            <motion.div
               key="faq"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -387,14 +389,14 @@ export const EligibilityPage: React.FC<EligibilityPageProps> = ({ onNavigate }) 
 
       {/* Persistent Mobile CTA */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-brand-dark border-t border-white/10 z-40">
-        <button 
-          onClick={() => onNavigate('application')}
+        <button
+          onClick={() => navigate('/application')}
           className="flex items-center justify-center w-full py-4 bg-brand-orange text-white font-bold uppercase tracking-widest rounded-none"
         >
           Start Application
         </button>
       </div>
 
-    </div>
+    </motion.div>
   );
 };

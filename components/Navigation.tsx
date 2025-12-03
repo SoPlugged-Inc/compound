@@ -2,18 +2,16 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-interface NavigationProps {
-  onNavigate: (view: 'home' | 'eligibility' | 'contact' | 'about' | 'application') => void;
-  currentView: 'home' | 'eligibility' | 'contact' | 'about' | 'application';
-}
-
-export const Navigation: React.FC<NavigationProps> = ({ onNavigate, currentView }) => {
+export const Navigation: React.FC = () => {
   const { scrollY } = useScroll();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
+  const location = useLocation();
+  const navigate = useNavigate();
+
   // Force dark mode styles
-  const isLightMode = false; 
+  const isLightMode = false;
 
   const backgroundColor = useTransform(
     scrollY,
@@ -29,6 +27,8 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigate, currentView 
   const textColor = isLightMode ? "text-brand-dark" : "text-white";
   const hoverColor = "text-brand-orange";
 
+  const isActive = (path: string) => location.pathname === path;
+
   return (
     <>
       <motion.nav
@@ -36,50 +36,50 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigate, currentView 
         className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 border-b ${isLightMode ? 'border-gray-200' : 'border-white/5'}`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <button onClick={() => onNavigate('home')} className={`relative z-50 font-display font-bold text-xl tracking-tighter ${textColor} group`}>
+          <Link to="/" className={`relative z-50 font-display font-bold text-xl tracking-tighter ${textColor} group`}>
             COMPOUND<span className="text-brand-orange group-hover:text-white transition-colors duration-300">.</span>
-          </button>
-          
+          </Link>
+
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-8 items-center">
-            <button
-              onClick={() => onNavigate('about')}
-              className={`text-sm font-medium ${currentView === 'about' ? 'text-brand-orange' : (isLightMode ? 'text-gray-600' : 'text-white/70')} hover:${hoverColor} transition-colors uppercase tracking-widest`}
+            <Link
+              to="/about"
+              className={`text-sm font-medium ${isActive('/about') ? 'text-brand-orange' : (isLightMode ? 'text-gray-600' : 'text-white/70')} hover:${hoverColor} transition-colors uppercase tracking-widest`}
             >
               About
-            </button>
+            </Link>
 
-            <button
-              onClick={() => onNavigate('eligibility')}
-              className={`text-sm font-medium ${currentView === 'eligibility' ? 'text-brand-orange' : (isLightMode ? 'text-gray-600' : 'text-white/70')} hover:${hoverColor} transition-colors uppercase tracking-widest`}
+            <Link
+              to="/eligibility"
+              className={`text-sm font-medium ${isActive('/eligibility') ? 'text-brand-orange' : (isLightMode ? 'text-gray-600' : 'text-white/70')} hover:${hoverColor} transition-colors uppercase tracking-widest`}
             >
               Eligibility
-            </button>
-             <button
-              onClick={() => onNavigate('contact')}
-              className={`text-sm font-medium ${currentView === 'contact' ? 'text-brand-orange' : (isLightMode ? 'text-gray-600' : 'text-white/70')} hover:${hoverColor} transition-colors uppercase tracking-widest`}
+            </Link>
+            <Link
+              to="/contact"
+              className={`text-sm font-medium ${isActive('/contact') ? 'text-brand-orange' : (isLightMode ? 'text-gray-600' : 'text-white/70')} hover:${hoverColor} transition-colors uppercase tracking-widest`}
             >
               Contact
-            </button>
+            </Link>
 
-            <button
-               onClick={() => onNavigate('application')}
-               className="relative group overflow-hidden px-6 py-3 bg-brand-dark text-white text-sm font-bold uppercase tracking-widest transition-all duration-300 rounded-none"
+            <Link
+              to="/application"
+              className="relative group overflow-hidden px-6 py-3 bg-brand-dark text-white text-sm font-bold uppercase tracking-widest transition-all duration-300 rounded-none"
             >
               {/* Border Beam Effect */}
               <div className="absolute inset-0 z-0">
-                 <div className="absolute inset-[-100%] w-[300%] h-[300%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_85%,#FD5F00_100%)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-[-100%] w-[300%] h-[300%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_85%,#FD5F00_100%)] animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              
+
               {/* Inner Background to mask the center of the beam */}
               <div className="absolute inset-[1px] bg-brand-orange z-0 group-hover:bg-brand-dark transition-colors duration-300" />
-              
+
               <span className="relative z-10 group-hover:text-brand-orange transition-colors">Apply Now</span>
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             className={`md:hidden relative z-50 ${textColor} focus:outline-none hover:text-brand-orange transition-colors`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -99,55 +99,75 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigate, currentView 
             className="fixed inset-0 z-40 bg-brand-dark flex flex-col items-center justify-center md:hidden"
           >
             <div className="flex flex-col gap-8 text-center">
-              <motion.button
-                 onClick={() => { onNavigate('home'); setIsMobileMenuOpen(false); }}
-                 initial={{ opacity: 0, y: 20 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ delay: 0.1 }}
-                 className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
               >
-                Home
-              </motion.button>
-              
-              <motion.button
-                 onClick={() => { onNavigate('about'); setIsMobileMenuOpen(false); }}
-                 initial={{ opacity: 0, y: 20 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ delay: 0.2 }}
-                 className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
-              >
-                About
-              </motion.button>
+                <Link
+                  to="/"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
+                >
+                  Home
+                </Link>
+              </motion.div>
 
-              <motion.button
-                 onClick={() => { onNavigate('eligibility'); setIsMobileMenuOpen(false); }}
-                 initial={{ opacity: 0, y: 20 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ delay: 0.3 }}
-                 className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
               >
-                Eligibility
-              </motion.button>
-              
-              <motion.button
-                 onClick={() => { onNavigate('contact'); setIsMobileMenuOpen(false); }}
-                 initial={{ opacity: 0, y: 20 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ delay: 0.35 }}
-                 className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
-              >
-                Contact
-              </motion.button>
+                <Link
+                  to="/about"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
+                >
+                  About
+                </Link>
+              </motion.div>
 
-              <motion.button
-                onClick={() => { onNavigate('application'); setIsMobileMenuOpen(false); }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Link
+                  to="/eligibility"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
+                >
+                  Eligibility
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+              >
+                <Link
+                  to="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
+                >
+                  Contact
+                </Link>
+              </motion.div>
+
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="px-8 py-4 bg-brand-orange text-white font-bold uppercase tracking-widest mt-4 rounded-none"
               >
-                Apply Now
-              </motion.button>
+                <Link
+                  to="/application"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="inline-block px-8 py-4 bg-brand-orange text-white font-bold uppercase tracking-widest mt-4 rounded-none"
+                >
+                  Apply Now
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
