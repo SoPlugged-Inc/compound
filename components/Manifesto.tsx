@@ -99,11 +99,12 @@ export const Manifesto: React.FC = () => {
                 className="absolute inset-0 flex flex-col justify-center"
               >
                 <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">
-                  {rotatingContent[currentIndex].text.split(' ').map((word, i, arr) => (
-                    <span key={i} className={i >= arr.length - 2 ? "text-brand-orange" : "text-white"}>
-                      {word}{i < arr.length - 1 ? '\u00A0' : ''}
-                    </span>
-                  ))}
+                  <span className="text-white">
+                    {rotatingContent[currentIndex].text.split(' ').slice(0, -2).join(' ')}
+                  </span>{' '}
+                  <span className="text-brand-orange">
+                    {rotatingContent[currentIndex].text.split(' ').slice(-2).join(' ')}
+                  </span>
                 </h2>
                 <p className="text-white/50 text-lg md:text-xl font-light">
                   {rotatingContent[currentIndex].subtext}
