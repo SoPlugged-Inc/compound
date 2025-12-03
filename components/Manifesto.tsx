@@ -37,7 +37,7 @@ const SpotlightCard = ({ icon: Icon, title, description, index }: { icon: any, t
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(253,95,0,0.1), transparent 40%)`,
         }}
       />
-      
+
       <div className="relative z-10">
         <div className="mb-6 p-4 bg-brand-dark w-fit border border-brand-orange/30 group-hover:border-brand-orange/100 transition-colors">
           <Icon className="w-6 h-6 md:w-8 md:h-8 text-brand-orange" />
@@ -86,7 +86,7 @@ export const Manifesto: React.FC = () => {
     <div className="py-16 md:py-24 px-4 md:px-6 bg-brand-dark relative">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-24">
-          
+
           {/* Rotating Content Card */}
           <div className="relative h-[200px] md:h-[240px]">
             <AnimatePresence mode="wait">
@@ -99,9 +99,9 @@ export const Manifesto: React.FC = () => {
                 className="absolute inset-0 flex flex-col justify-center"
               >
                 <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">
-                  {rotatingContent[currentIndex].text.split(' ').map((word, i) => (
-                    <span key={i} className={i >= rotatingContent[currentIndex].text.split(' ').length - 2 ? "text-brand-orange" : "text-white"}>
-                      {word} 
+                  {rotatingContent[currentIndex].text.split(' ').map((word, i, arr) => (
+                    <span key={i} className={i >= arr.length - 2 ? "text-brand-orange" : "text-white"}>
+                      {word}{i < arr.length - 1 ? '\u00A0' : ''}
                     </span>
                   ))}
                 </h2>
@@ -111,15 +111,15 @@ export const Manifesto: React.FC = () => {
               </motion.div>
             </AnimatePresence>
 
-             {/* Controls */}
-             <div className="absolute bottom-0 right-0 flex gap-4">
-                <button onClick={prevSlide} className="p-2 border border-white/20 hover:border-brand-orange hover:text-brand-orange transition-colors rounded-full">
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button onClick={nextSlide} className="p-2 border border-white/20 hover:border-brand-orange hover:text-brand-orange transition-colors rounded-full">
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-             </div>
+            {/* Controls */}
+            <div className="absolute bottom-0 right-0 flex gap-4">
+              <button onClick={prevSlide} className="p-2 border border-white/20 hover:border-brand-orange hover:text-brand-orange transition-colors rounded-full">
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button onClick={nextSlide} className="p-2 border border-white/20 hover:border-brand-orange hover:text-brand-orange transition-colors rounded-full">
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           <motion.div
