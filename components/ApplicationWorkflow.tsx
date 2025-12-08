@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, ArrowRight, ArrowLeft, AlertCircle } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const steps = [
   "About You",
@@ -14,23 +14,27 @@ const steps = [
 
 export const ApplicationWorkflow: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Check for pre-filled data from EligibilityCheck
+  const prefill = (location.state as any)?.prefill || {};
+
   // State for all form fields
   const [formData, setFormData] = useState({
     // Step 1
     fullName: '',
-    email: '',
+    email: prefill.email || '',
     location: '',
-    businessName: '',
+    businessName: prefill.businessName || '',
     website: '',
-    startDate: '',
+    startDate: prefill.startDate || '',
     // Step 2
     businessDescription: '',
-    businessCategories: [] as string[],
+    businessCategories: prefill.industry ? [prefill.industry] : [] as string[],
     salesChannels: [] as string[],
     revenue: '',
     // Step 3
