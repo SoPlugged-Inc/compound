@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Hero } from './Hero';
 import { Manifesto } from './Manifesto';
 import { Journey } from './Journey';
-import { EligibilityAI } from './EligibilityAI';
+
 
 interface HomeProps {
     onNavigate?: (view: any) => void; // Keeping for compatibility if needed, but we'll switch to router
@@ -29,9 +29,7 @@ export const Home: React.FC<HomeProps> = () => {
                 <Journey />
             </section>
 
-            <section id="ai-check" className="relative z-10">
-                <EligibilityAI />
-            </section>
+
         </motion.div>
     );
 };
