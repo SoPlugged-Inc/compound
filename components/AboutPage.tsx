@@ -90,7 +90,7 @@ export const AboutPage: React.FC = () => {
               Apply Now
             </button>
             <button
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/recap')}
               className="text-white/60 hover:text-white hover:underline underline-offset-4 uppercase tracking-widest text-sm font-medium transition-colors flex items-center gap-2"
             >
               Watch Our Story <ArrowRight className="w-4 h-4" />
