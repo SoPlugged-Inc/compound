@@ -2,7 +2,8 @@ media: public/media
 public_path: /media
 
 content:
-  - label: Blog Posts
+  - name: blog
+    label: Blog Posts
     path: src/content/blog
     type: collection
     format: yaml-frontmatter
