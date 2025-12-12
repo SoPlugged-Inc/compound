@@ -9,6 +9,8 @@ import { ContactPage } from './components/ContactPage';
 import { AboutPage } from './components/AboutPage';
 import { StoryRecap } from './components/StoryRecap';
 import { ApplicationWorkflow } from './components/ApplicationWorkflow';
+import { BlogIndex } from './components/BlogIndex';
+import { BlogPost } from './components/BlogPost';
 import { AnimatePresence, motion } from 'framer-motion';
 
 function AnimatedRoutes() {
@@ -22,6 +24,8 @@ function AnimatedRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/eligibility" element={<EligibilityPage />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/application" element={<ApplicationWorkflow />} />
         <Route

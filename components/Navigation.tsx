@@ -56,6 +56,12 @@ export const Navigation: React.FC = () => {
               Eligibility
             </Link>
             <Link
+              to="/blog"
+              className={`text-sm font-medium ${isActive('/blog') ? 'text-brand-orange' : (isLightMode ? 'text-gray-600' : 'text-white/70')} hover:${hoverColor} transition-colors uppercase tracking-widest`}
+            >
+              Stories
+            </Link>
+            <Link
               to="/contact"
               className={`text-sm font-medium ${isActive('/contact') ? 'text-brand-orange' : (isLightMode ? 'text-gray-600' : 'text-white/70')} hover:${hoverColor} transition-colors uppercase tracking-widest`}
             >
@@ -138,6 +144,20 @@ export const Navigation: React.FC = () => {
                   className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
                 >
                   Eligibility
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.32 }}
+              >
+                <Link
+                  to="/blog"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-display text-3xl font-bold text-white hover:text-brand-orange transition-colors"
+                >
+                  Stories
                 </Link>
               </motion.div>
 
