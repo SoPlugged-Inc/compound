@@ -44,7 +44,7 @@ const StaggeredText = ({
                 key={`${char}-${i}`}
                 initial={
                     mode === 'impact'
-                        ? { y: "100%", scale: 1.5, filter: "blur(20px)", opacity: 0 }
+                        ? { y: "110%", scale: 1.2, filter: "blur(20px)", opacity: 0 }
                         : { y: "110%", filter: "blur(10px)", opacity: 0 }
                 }
                 animate={
@@ -53,9 +53,9 @@ const StaggeredText = ({
                         : { y: "0%", filter: "blur(0px)", opacity: 1 }
                 }
                 transition={{
-                    duration: mode === 'impact' ? 0.9 : 0.6,
-                    delay: delay + i * 0.05,
-                    ease: [0.2, 0.65, 0.3, 0.9] // Custom easing for punchy feel
+                    duration: mode === 'impact' ? 0.8 : 0.6,
+                    delay: delay + i * 0.06, // Slightly slower stagger for impact
+                    ease: [0.33, 1, 0.68, 1] // Hero ease
                 }}
                 className={`inline-block ${color}`}
             >
@@ -212,13 +212,13 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                         <DynamicBackground />
                         <div className="relative z-10">
                             <motion.div variants={textVariants} custom={0} className="text-brand-orange text-lg md:text-xl uppercase tracking-[0.5em] font-bold mb-4">
-                                Retrospective
+                                If you’re here, you’re early.
                             </motion.div>
                             <div className="font-display font-black text-[15vw] leading-[0.85] tracking-tighter overflow-hidden">
                                 <StaggeredText text="2025." delay={0.2} mode="impact" />
                             </div>
                             <motion.p variants={textVariants} custom={2} className="mt-8 text-xl md:text-3xl text-white/60 font-light tracking-wide max-w-2xl mx-auto">
-                                A year of measurable progress.
+                                Welcome to our 2025 Recap.
                             </motion.p>
                         </div>
                     </motion.div>
@@ -237,17 +237,23 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                     >
                         <DynamicBackground color="bg-[#1a0b00]" />
                         <div className="relative z-10 w-full max-w-7xl mx-auto">
-                            <motion.div variants={textVariants} custom={0} className="mb-12 border-b border-white/20 pb-4 inline-block">
+                            <motion.div variants={textVariants} custom={0} className="mb-6 md:mb-12 border-b border-white/20 pb-4 inline-block">
                                 <h2 className="text-white text-sm uppercase tracking-widest font-bold">The Ecosystem</h2>
                             </motion.div>
 
-                            <div className="flex flex-col md:flex-row gap-16 md:gap-32">
+                            <div className="flex flex-col md:flex-row gap-6 md:gap-32">
                                 <motion.div variants={textVariants} custom={1} className="flex-1">
                                     <motion.span
-                                        className="block font-display font-black text-[12vw] md:text-8xl text-brand-orange leading-none"
-                                        initial={{ scale: 0.8, opacity: 0 }}
-                                        animate={{ scale: 1, opacity: 1 }}
-                                        transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.4 }}
+                                        className="block font-display font-black text-6xl md:text-8xl text-brand-orange leading-none"
+                                        initial={{ scale: 0.5, opacity: 0, y: 50 }}
+                                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                                        transition={{
+                                            type: "spring",
+                                            damping: 15,
+                                            stiffness: 200,
+                                            mass: 0.8,
+                                            delay: 0.4
+                                        }}
                                     >
                                         <AnimatedCounter value={250} suffix="+" />
                                     </motion.span>
@@ -255,10 +261,16 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                                 </motion.div>
                                 <motion.div variants={textVariants} custom={2} className="flex-1">
                                     <motion.span
-                                        className="block font-display font-black text-[12vw] md:text-8xl text-white leading-none"
-                                        initial={{ scale: 0.8, opacity: 0 }}
-                                        animate={{ scale: 1, opacity: 1 }}
-                                        transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.6 }}
+                                        className="block font-display font-black text-6xl md:text-8xl text-white leading-none"
+                                        initial={{ scale: 0.5, opacity: 0, y: 50 }}
+                                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                                        transition={{
+                                            type: "spring",
+                                            damping: 15,
+                                            stiffness: 200,
+                                            mass: 0.8,
+                                            delay: 0.6
+                                        }}
                                     >
                                         <AnimatedCounter value={3000} suffix="+" />
                                     </motion.span>
@@ -266,14 +278,14 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                                 </motion.div>
                             </div>
 
-                            <motion.p variants={textVariants} custom={3} className="mt-16 text-xl md:text-2xl text-white/50 max-w-2xl">
-                                We didn't just build a list. We built a living, breathing network.
+                            <motion.p variants={textVariants} custom={3} className="mt-8 md:mt-16 text-lg md:text-2xl text-white/50 w-full whitespace-normal md:whitespace-nowrap leading-tight">
+                                We didn't just build a directory. We built a scalable network.
                             </motion.p>
                         </div>
                     </motion.div>
                 );
 
-            // SLIDE 3: Touchpoints
+            // SLIDE 3: Touchpoints (Activations)
             case 2:
                 return (
                     <motion.div
@@ -286,8 +298,8 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                     >
                         <DynamicBackground />
                         <div className="max-w-4xl mx-auto w-full relative z-10">
-                            <motion.h2 variants={textVariants} custom={0} className="font-display font-bold text-5xl md:text-7xl text-white mb-12">
-                                Touchpoints
+                            <motion.h2 variants={textVariants} custom={0} className="font-display font-bold text-5xl md:text-7xl text-white mb-8 md:mb-12">
+                                Activations
                             </motion.h2>
                             <div className="space-y-6">
                                 {['Black Market Toronto', 'Black Market Ottawa', 'BWIB Dinner', 'Founder Meetups', 'Studio Sessions'].map((item, i) => (
@@ -319,13 +331,13 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                         className="h-full flex flex-col justify-center items-center text-center px-6 relative z-10 bg-brand-lightBrown"
                     >
                         <div className="absolute inset-0 bg-brand-orange mix-blend-multiply opacity-20" />
-                        <div className="relative z-10">
+                        <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center">
                             <motion.p variants={textVariants} custom={0} className="text-white/80 font-mono text-sm uppercase tracking-widest mb-4">Total Vendor Revenue</motion.p>
-                            <motion.div variants={textVariants} custom={1} className="font-display font-black text-[18vw] leading-none text-white drop-shadow-2xl">
+                            <motion.div variants={textVariants} custom={1} className="font-display font-black text-[18vw] leading-none text-white drop-shadow-2xl mb-8">
                                 <AnimatedCounter value={150} prefix="$" suffix="k+" />
                             </motion.div>
-                            <motion.div variants={textVariants} custom={2} className="mt-8 max-w-xl mx-auto bg-black/20 backdrop-blur-md p-6 border border-white/10">
-                                <p className="text-lg md:text-xl text-white leading-relaxed">
+                            <motion.div variants={textVariants} custom={2} className="max-w-3xl mx-auto bg-black/20 backdrop-blur-md p-6 border border-white/10 w-full">
+                                <p className="text-lg md:text-2xl text-white leading-relaxed whitespace-normal md:whitespace-nowrap">
                                     A simple model: put qualified buyers in front of prepared businesses.
                                 </p>
                             </motion.div>
@@ -381,7 +393,7 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                         <div className="max-w-5xl mx-auto w-full relative z-10">
                             <motion.h2 variants={textVariants} custom={0} className="font-display font-bold text-5xl md:text-6xl text-white mb-20">Platform Activity</motion.h2>
 
-                            <div className="space-y-12">
+                            <div className="space-y-8 md:space-y-12">
                                 <motion.div variants={textVariants} custom={1} className="relative">
                                     <div className="text-[10vw] md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-white leading-none">
                                         <AnimatedCounter value={24500} suffix="+" />
@@ -415,9 +427,9 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                                 initial={{ width: 0 }}
                                 animate={{ width: 100 }}
                                 transition={{ duration: 1, delay: 0.5 }}
-                                className="h-2 bg-brand-orange mb-12 mx-auto"
+                                className="h-2 bg-brand-orange mb-8 md:mb-12 mx-auto"
                             />
-                            <motion.h2 variants={textVariants} custom={0} className="font-display font-bold text-3xl md:text-6xl text-white leading-tight mb-12">
+                            <motion.h2 variants={textVariants} custom={0} className="font-display font-bold text-3xl md:text-6xl text-white leading-tight mb-8 md:mb-12">
                                 Founders don't lack motivation. <br />
                                 They lack <span className="text-brand-orange">infrastructure</span>.
                             </motion.h2>
@@ -444,14 +456,14 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                         {/* Ominous Red/Orange Glow */}
                         <div className="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] rounded-full bg-brand-orange/20 blur-[120px] pointer-events-none" />
 
-                        <div className="max-w-6xl mx-auto w-full relative z-10 flex flex-col justify-center h-full">
-                            <motion.div variants={textVariants} custom={0} className="flex items-center gap-3 mb-6">
+                        <div className="max-w-6xl mx-auto w-full relative z-10 flex flex-col justify-center h-full py-12">
+                            <motion.div variants={textVariants} custom={0} className="flex items-center gap-3 mb-4 md:mb-8">
                                 <div className="h-px w-12 bg-white/30" />
                                 <span className="font-bold text-white/70 uppercase tracking-[0.2em] text-sm">The Constraint</span>
                             </motion.div>
 
                             {/* Constraint Visual: Heavy borders pressing on the text - Adjusted spacing */}
-                            <div className="relative py-2 md:py-8 my-4 md:my-8 overflow-hidden w-full">
+                            <div className="relative py-4 md:py-10 my-6 md:my-10 overflow-hidden w-full">
                                 <motion.div
                                     initial={{ scaleX: 0 }}
                                     animate={{ scaleX: 1 }}
@@ -463,7 +475,7 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                                     initial={{ opacity: 0, y: 10, scale: 0.98 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     transition={{ delay: 0.3, duration: 0.8 }}
-                                    className="font-display font-black text-[10vw] md:text-[12vw] leading-none text-transparent text-stroke-white md:text-stroke-2 opacity-80 whitespace-nowrap"
+                                    className="font-display font-black text-[7vw] leading-none text-transparent text-stroke-white md:text-stroke-2 opacity-80 whitespace-nowrap py-4"
                                     style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)', color: 'transparent' }}
                                 >
                                     LIMITATION
@@ -477,7 +489,7 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                                 />
                             </div>
 
-                            <motion.p variants={textVariants} custom={2} className="text-xl md:text-4xl font-light text-white/90 leading-tight max-w-3xl mt-4 md:mt-8">
+                            <motion.p variants={textVariants} custom={2} className="text-xl md:text-3xl font-light text-white/90 leading-tight max-w-3xl mt-8 md:mt-16">
                                 Events solved part of the problem. <br className="hidden md:block" />
                                 But growth was still trapped by <span className="text-brand-orange font-bold">timing, capacity, and luck.</span>
                             </motion.p>
@@ -497,7 +509,7 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                         className="h-full flex flex-col justify-center items-center text-center px-6 relative z-10 bg-brand-dark"
                     >
                         <DynamicBackground />
-                        <div className="relative z-10 max-w-4xl">
+                        <div className="relative z-10 max-w-5xl">
                             <motion.div
                                 initial={{ scale: 0, rotate: -180 }}
                                 animate={{ scale: 1, rotate: 0 }}
@@ -507,7 +519,7 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                                 ?
                             </motion.div>
                             <motion.h2 variants={textVariants} custom={1} className="font-display font-bold text-3xl md:text-5xl text-white leading-tight">
-                                What if we built a consistent engine for Black-owned consumer brands?
+                                What if we created an accelerator program for Black-owned consumer brands?
                             </motion.h2>
                         </div>
                     </motion.div>
@@ -525,19 +537,19 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                         className="h-full flex flex-col justify-center px-6 relative z-10 bg-brand-dark"
                     >
                         <DynamicBackground />
-                        {/* Adjusted Grid Gap and Typography Sizing for Mobile */}
-                        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-center relative z-10">
-                            <motion.div variants={textVariants} custom={0} className="leading-none">
+                        {/* Adjusted Grid Gap and Typography Sizing for Mobile - Further refined */}
+                        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-20 lg:gap-40 items-center relative z-10 px-4 md:px-0">
+                            <motion.div variants={textVariants} custom={0} className="leading-none pt-4 lg:pt-0 text-center lg:text-left">
                                 {/* Responsive Typography for better fit */}
-                                <h2 className="font-display font-black text-[12vw] lg:text-[10vw] text-white leading-[0.8] tracking-tighter">
+                                <h2 className="font-display font-black text-[13vw] lg:text-[10vw] text-white leading-[0.8] tracking-tighter">
                                     THE<br /><span className="text-brand-orange">PIVOT</span>
                                 </h2>
                             </motion.div>
-                            <motion.div variants={textVariants} custom={1} className="space-y-4 md:space-y-6 lg:pl-8 border-l border-white/10 pl-4">
-                                <p className="text-lg md:text-2xl text-white/80 font-light leading-relaxed">
+                            <motion.div variants={textVariants} custom={1} className="space-y-6 md:space-y-8 lg:pl-12 border-l border-white/10 pl-8 pb-8 lg:pb-0">
+                                <p className="text-xl md:text-3xl text-white/80 font-light leading-relaxed">
                                     SoPlugged couldn't just be a directory anymore.
                                 </p>
-                                <p className="text-xl md:text-3xl text-white font-bold leading-relaxed">
+                                <p className="text-2xl md:text-4xl text-white font-bold leading-relaxed">
                                     It had to become a <span className="text-brand-orange">structured growth platform</span>.
                                 </p>
                             </motion.div>
@@ -556,26 +568,26 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                         exit="exit"
                         className="h-full flex flex-col justify-center items-center text-center px-4 relative z-10 bg-brand-orange text-brand-dark overflow-hidden"
                     >
-                        <div className="relative z-10 w-full max-w-[100vw] flex flex-col items-center">
-                            <motion.div variants={textVariants} custom={0} className="uppercase tracking-[0.5em] font-bold text-xs md:text-sm mb-4 md:mb-8 text-white">Introducing</motion.div>
+                        <div className="relative z-10 w-full max-w-[100vw] flex flex-col items-center justify-center h-full py-12">
+                            <motion.div variants={textVariants} custom={0} className="uppercase tracking-[0.5em] font-bold text-sm md:text-base mb-8 md:mb-12 text-white">Introducing</motion.div>
 
                             {/* Updated Typography Sizing & Default Animation (Hero Style) */}
-                            <div className="w-full flex justify-center mb-6 md:mb-10 px-2">
-                                <div className="font-display font-black text-[13vw] md:text-[11vw] lg:text-[10vw] leading-[0.85] tracking-tighter text-brand-dark whitespace-nowrap overflow-visible">
-                                    <StaggeredText text="COMPOUND" color="text-brand-dark" delay={0.2} />
+                            <div className="w-full flex justify-center mb-6 md:mb-16 px-2">
+                                <div className="font-display font-black text-[9vw] md:text-[10vw] lg:text-[9vw] leading-[0.85] tracking-tighter text-brand-dark whitespace-nowrap overflow-visible">
+                                    <StaggeredText text="COMPOUND" color="text-brand-dark" delay={0.2} mode="impact" />
                                 </div>
                             </div>
 
-                            <motion.div variants={textVariants} custom={2} className="max-w-3xl mx-auto px-4">
-                                <p className="text-xl md:text-3xl font-bold leading-tight mb-8 text-white">
+                            <motion.div variants={textVariants} custom={2} className="max-w-4xl mx-auto px-4 w-full">
+                                <p className="text-2xl md:text-4xl font-normal leading-tight mb-6 md:mb-10 text-white">
                                     A business accelerator designed for Black-owned consumer brands.
                                 </p>
-                                <div className="flex flex-wrap justify-center gap-3 md:gap-6 text-brand-dark/80 text-sm md:text-lg font-bold uppercase tracking-wide">
+                                <div className="flex flex-nowrap justify-center gap-2 md:gap-10 text-brand-dark/80 text-[10px] sm:text-sm md:text-xl font-bold uppercase tracking-wide w-full whitespace-nowrap">
                                     <span>Capital</span>
                                     <span>•</span>
                                     <span>Customers</span>
                                     <span>•</span>
-                                    <span>Support</span>
+                                    <span>Community</span>
                                 </div>
                             </motion.div>
                         </div>
@@ -594,22 +606,39 @@ export const StoryRecap: React.FC<StoryRecapProps> = ({ onExit, onComplete }) =>
                         className="h-full flex flex-col justify-center items-center text-center px-6 relative z-10 bg-brand-dark"
                     >
                         <DynamicBackground />
-                        <div className="relative z-10 max-w-4xl">
-                            <motion.h2 variants={textVariants} custom={0} className="text-3xl md:text-5xl text-white font-light leading-tight mb-16">
+                        <div className="relative z-10 max-w-4xl flex flex-col items-center">
+                            <motion.h2 variants={textVariants} custom={0} className="text-2xl md:text-5xl text-white font-light leading-snug mb-8 md:mb-16">
                                 SoPlugged created density.<br />
-                                <strong className="text-brand-orange font-display">Compound creates outcomes.</strong>
+                                <strong className="text-brand-orange font-display block mt-2">Compound creates outcomes.</strong>
                             </motion.h2>
 
                             <motion.button
                                 variants={textVariants}
                                 custom={1}
-                                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(253,95,0,0.3)" }}
+                                whileHover={{
+                                    scale: 1.05,
+                                    boxShadow: "0 0 40px rgba(255, 255, 255, 0.2)",
+                                }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={onComplete}
-                                className="group relative px-12 py-6 bg-gradient-to-br from-white to-gray-200 text-brand-dark font-display font-bold text-xl uppercase tracking-widest flex items-center gap-4 mx-auto border border-white/50"
+                                className="group relative px-8 py-4 md:px-12 md:py-6 bg-gradient-to-br from-white via-gray-100 to-gray-300 text-brand-dark font-display font-bold text-base md:text-xl uppercase tracking-widest flex items-center gap-4 mx-auto border border-white/50 overflow-hidden whitespace-nowrap"
                             >
-                                <span className="group-hover:text-brand-orange transition-colors duration-300">Return Home</span>
-                                <Home className="w-5 h-5 group-hover:text-brand-orange transition-colors duration-300" />
+                                <span className="group-hover:text-brand-orange group-hover:scale-105 transition-all duration-300 relative z-10">Join Compound</span>
+                                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:text-brand-orange group-hover:scale-110 transition-all duration-300 relative z-10" />
+
+                                {/* Button sheen effect */}
+                                <div className="absolute inset-0 w-full h-full bg-white/40 skew-x-12 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out" />
+                            </motion.button>
+
+                            {/* Return Home Link */}
+                            <motion.button
+                                variants={textVariants}
+                                custom={2}
+                                onClick={onExit}
+                                className="mt-8 text-white/40 hover:text-white text-xs md:text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2 group/link"
+                            >
+                                Return Home
+                                <ArrowRight className="w-3 h-3 md:w-4 md:h-4 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
                             </motion.button>
                         </div>
                     </motion.div>

@@ -29,7 +29,7 @@ function AnimatedRoutes() {
           element={
             <StoryRecap
               onExit={() => navigate('/')}
-              onComplete={() => navigate('/')}
+              onComplete={() => navigate('/application')}
             />
           }
         />
