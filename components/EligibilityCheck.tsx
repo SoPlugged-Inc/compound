@@ -77,7 +77,7 @@ export const EligibilityCheck: React.FC = () => {
                                 </div>
                                 <h3 className="text-white font-bold text-lg mb-2">$250 CAD / year</h3>
                                 <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-                                    No equity taken. No hidden fees. Just pure value.
+                                    No equity taken. No hidden fees. Billed monthly.
                                 </p>
                             </div>
                         </div>
