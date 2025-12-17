@@ -1,10 +1,14 @@
-
-import React from 'react';
-import { Mail, MapPin, Instagram, Linkedin } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, MapPin, Instagram, Linkedin, Check, Loader2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+
+// TODO: User must set this URL from the Setup Guide
+const GOOGLE_SCRIPT_URL = "YOUR_SCRIPT_URL_HERE";
 
 export const Footer: React.FC = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
   const handleNav = (e: React.MouseEvent, path: string, sectionId?: string) => {
     e.preventDefault();
@@ -15,6 +19,38 @@ export const Footer: React.FC = () => {
       }, 100);
     } else {
       window.scrollTo(0, 0);
+    }
+  };
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    if (GOOGLE_SCRIPT_URL === "YOUR_SCRIPT_URL_HERE") {
+      alert("Newsletter is not connected yet! Please check SETUP_NEWSLETTER.md");
+      return;
+    }
+
+    setStatus('submitting');
+
+    try {
+      const formData = new FormData();
+      formData.append('email', email);
+
+      // mode: 'no-cors' is required for Google Apps Script to work publicly
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+
+      // Since no-cors returns an opaque response, we assume success if no error was thrown
+      setStatus('success');
+      setEmail('');
+    } catch (err) {
+      console.error("Subscription Error:", err);
+      setStatus('idle');
+      alert("Something went wrong. Please try again.");
     }
   };
 
@@ -77,21 +113,39 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Newsletter Section */}
-          <div className="max-w-xs">
+          <div className="max-w-xs relative z-10">
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-4">Stay in the Loop</h4>
             <p className="text-sm text-white/50 mb-4">
               Get the latest updates on grant opportunities and community events.
             </p>
-            <form className="flex border-b border-white/20 pb-2 focus-within:border-brand-orange transition-colors" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="bg-transparent border-none outline-none text-white text-sm w-full placeholder:text-white/20"
-              />
-              <button className="text-brand-orange hover:text-white transition-colors uppercase text-xs font-bold tracking-widest">
-                Join
-              </button>
-            </form>
+
+            {status === 'success' ? (
+              <div className="flex items-center gap-2 text-brand-orange font-bold text-sm bg-brand-orange/10 p-3 rounded border border-brand-orange/20 animate-in fade-in duration-300">
+                <Check className="w-4 h-4" />
+                <span>You're on the list!</span>
+              </div>
+            ) : (
+              <form
+                className={`flex border-b border-white/20 pb-2 transition-colors ${status === 'submitting' ? 'opacity-50 cursor-wait' : 'focus-within:border-brand-orange'}`}
+                onSubmit={handleSubscribe}
+              >
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  disabled={status === 'submitting'}
+                  className="bg-transparent border-none outline-none text-white text-sm w-full placeholder:text-white/20 relative z-10"
+                />
+                <button
+                  disabled={status === 'submitting'}
+                  className="text-brand-orange hover:text-white transition-colors uppercase text-xs font-bold tracking-widest disabled:opacity-50 relative z-10"
+                >
+                  {status === 'submitting' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Join'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
