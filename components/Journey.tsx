@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const milestones = [
   {
@@ -31,7 +31,13 @@ const milestones = [
 
 export const Journey: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
   return (
     <div className="py-20 md:py-32 px-4 md:px-6 bg-brand-dark overflow-hidden" ref={containerRef}>
       <div className="max-w-6xl mx-auto">
@@ -57,28 +63,30 @@ export const Journey: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.7, delay: index * 0.1 }}
-                className={`relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 ${
-                  index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                }`}
+                className={`relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                  }`}
               >
                 {/* Content Box */}
                 <div className="flex-1 pl-12 md:pl-0 md:w-1/2">
-                   <div className={`md:p-8 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                  <div className={`md:p-8 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
                     <h3 className="font-display font-bold text-2xl md:text-3xl text-brand-cream mb-2">{item.title}</h3>
                     <p className="text-white/60 leading-relaxed text-sm md:text-base">{item.description}</p>
-                   </div>
+                  </div>
                 </div>
 
                 {/* Year Bubble */}
                 <div className="absolute left-4 md:left-1/2 w-3 h-3 md:w-12 md:h-12 -translate-x-1/2 rounded-full bg-brand-orange border md:border-4 border-brand-dark z-10 flex items-center justify-center mt-2 md:mt-0">
-                    <div className="hidden md:block w-2 h-2 bg-white rounded-full" />
+                  <div className="hidden md:block w-2 h-2 bg-white rounded-full" />
                 </div>
-                 
-                {/* Big Year Label (Decorative) */}
+
+                {/* Big Year Label (Decorative) with Parallax */}
                 <div className={`flex-1 pl-12 md:pl-0 flex ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                  <span className="font-display font-black text-5xl md:text-8xl text-white/5 md:px-8">
+                  <motion.span
+                    style={{ y }}
+                    className="font-display font-black text-5xl md:text-8xl text-white/5 md:px-8 block"
+                  >
                     {item.year}
-                  </span>
+                  </motion.span>
                 </div>
               </motion.div>
             ))}

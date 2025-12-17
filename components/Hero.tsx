@@ -52,9 +52,9 @@ export const Hero: React.FC = () => {
       <ColumnBackground />
 
       {/* Background Atmospheric Elements */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        <motion.div style={{ y: y1 }} className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] md:w-[50vw] md:h-[50vw] rounded-full bg-brand-orange blur-[120px] opacity-10 animate-pulse" />
-        <motion.div style={{ y: y2 }} className="absolute bottom-[-10%] right-[-10%] w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full bg-brand-brown blur-[100px] opacity-20" />
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none transform-gpu">
+        <motion.div style={{ y: y1 }} className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] md:w-[50vw] md:h-[50vw] rounded-full bg-brand-orange blur-[100px] opacity-10 will-change-transform" />
+        <motion.div style={{ y: y2 }} className="absolute bottom-[-10%] right-[-10%] w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full bg-brand-brown blur-[80px] opacity-20 will-change-transform" />
       </div>
 
       <div className="relative z-10 w-full mx-auto text-center flex flex-col items-center">
@@ -86,12 +86,12 @@ export const Hero: React.FC = () => {
               }}
             >
               {[...Array(8)].map((_, i) => (
-                <StaggeredText
+                <span
                   key={`growth-${i}`}
-                  text="GROWTH"
-                  delay={0.5}
                   className="font-display font-extrabold text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter text-white"
-                />
+                >
+                  GROWTH
+                </span>
               ))}
             </motion.div>
           </div>
@@ -123,7 +123,6 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 1 }}
           className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/70 leading-relaxed font-light px-4"
         >
-          We have evolved. SoPlugged is now <strong className="text-white">Compound Accelerator</strong>.
           A world where bootstrapped consumer brands get the capital, community, and clarity to scale sustainably.
         </motion.p>
 

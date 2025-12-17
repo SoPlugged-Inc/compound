@@ -76,7 +76,7 @@ export default function App() {
           <Router>
             <main className="relative z-10">
               {/* Global Background Noise Texture */}
-              <div className="fixed inset-0 bg-noise pointer-events-none z-0 mix-blend-overlay" />
+              <div className="fixed inset-0 bg-noise pointer-events-none z-0 opacity-10" />
 
               <Navigation />
               <AnimatedRoutes />

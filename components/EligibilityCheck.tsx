@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { CheckCircle } from 'lucide-react';
 
 // Custom Brand Icon (Sharp Directional Arrow)
 const CompoundIcon = ({ className }: { className?: string }) => (
@@ -33,6 +34,8 @@ export const EligibilityCheck: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-brown/20 to-brand-dark" />
 
             <div className="max-w-4xl mx-auto relative z-10">
+                {/* Is This You? Section Removed */}
+
                 <div className="text-center mb-8 md:mb-12">
                     <motion.div
                         initial={{ scale: 0 }}
@@ -41,10 +44,30 @@ export const EligibilityCheck: React.FC = () => {
                     >
                         <CompoundIcon className="w-6 h-6 text-brand-orange" />
                     </motion.div>
-                    <h2 className="font-display font-bold text-3xl md:text-5xl mb-4">Start Your Journey</h2>
-                    <p className="text-white/60 max-w-xl mx-auto text-sm md:text-base">
-                        Ready to scale? Begin your application here and we'll carry your details forward.
-                    </p>
+                    <h2 className="font-display font-bold text-3xl md:text-5xl mb-8">Ready to Compound?</h2>
+
+                    <div className="max-w-2xl mx-auto mb-10 text-left">
+                        <div className="space-y-4">
+                            <div className="flex gap-4 items-start bg-white/5 p-4 rounded-lg border border-white/5">
+                                <CheckCircle className="w-6 h-6 text-brand-orange flex-shrink-0 mt-0.5" />
+                                <p className="text-white/80 text-sm md:text-base font-light">
+                                    You'll need about 4 minutes and a link to your active website or business Instagram.
+                                </p>
+                            </div>
+                            <div className="flex gap-4 items-start bg-white/5 p-4 rounded-lg border border-white/5">
+                                <CheckCircle className="w-6 h-6 text-brand-orange flex-shrink-0 mt-0.5" />
+                                <p className="text-white/80 text-sm md:text-base font-light">
+                                    We review every submission personally. Incomplete applications will be skipped.
+                                </p>
+                            </div>
+                            <div className="flex gap-4 items-start bg-white/5 p-4 rounded-lg border border-white/5">
+                                <CheckCircle className="w-6 h-6 text-brand-orange flex-shrink-0 mt-0.5" />
+                                <p className="text-white/80 text-sm md:text-base font-light">
+                                    Membership is <strong className="text-white"> $250 CAD/year</strong>. We do not take equity or charge hidden fees.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <motion.div
@@ -119,7 +142,7 @@ export const EligibilityCheck: React.FC = () => {
                             type="submit"
                             className="w-full py-4 bg-brand-orange text-white font-bold uppercase tracking-widest hover:bg-white hover:text-brand-orange transition-colors flex items-center justify-center gap-2 rounded-none group"
                         >
-                            Continue Application
+                            Start Application
                             <CompoundIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
                     </form>

@@ -1,7 +1,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Target, Users, Zap, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Target, Users, Zap, ChevronLeft, ChevronRight, Layout, RefreshCw, MessageCircle, Store } from 'lucide-react';
 
 const SpotlightCard = ({ icon: Icon, title, description, index }: { icon: any, title: string, description: string, index: number }) => {
   const divRef = useRef<HTMLDivElement>(null);
@@ -26,8 +26,8 @@ const SpotlightCard = ({ icon: Icon, title, description, index }: { icon: any, t
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
-      className="relative p-6 md:p-8 border border-white/10 bg-white/5 rounded-none overflow-hidden group"
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="relative p-6 md:p-8 border border-white/10 bg-white/5 rounded-none overflow-hidden group h-full flex flex-col"
     >
       {/* Spotlight Effect */}
       <div
@@ -38,12 +38,12 @@ const SpotlightCard = ({ icon: Icon, title, description, index }: { icon: any, t
         }}
       />
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="mb-6 p-4 bg-brand-dark w-fit border border-brand-orange/30 group-hover:border-brand-orange/100 transition-colors">
           <Icon className="w-6 h-6 md:w-8 md:h-8 text-brand-orange" />
         </div>
         <h3 className="font-display font-bold text-xl md:text-2xl mb-4 text-white">{title}</h3>
-        <p className="text-white/60 leading-relaxed font-light text-sm md:text-base">
+        <p className="text-white/60 leading-relaxed font-light text-sm md:text-base flex-grow">
           {description}
         </p>
       </div>
@@ -130,29 +130,47 @@ export const Manifesto: React.FC = () => {
             className="flex items-center"
           >
             <p className="text-lg md:text-xl text-white/80 font-light leading-relaxed border-l-2 border-brand-orange pl-6">
-              Compound exists to give founders the structured support, expert insight, and community they need to move their businesses forward. We are designed for the bootstrapped, the persistent, and the visionaries.
+              Compound exists to give founders the structured support, expert insight, and community they need to move their businesses forward. We are designed for the "Kitchen Table CEOs"—the bootstrapped and the persistent.
             </p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <SpotlightCard
             index={0}
             icon={Target}
-            title="Strategic Clarity"
-            description="Move beyond the experimental phase. We provide the blueprints for operational efficiency and sustainable scaling for physical product brands."
+            title="Operational Strategy"
+            description="&quot;More sales&quot; can bankrupt you if your margins are wrong. We map out your pricing, logistics, and marketing calendar so you scale profitably, not painfully."
           />
           <SpotlightCard
             index={1}
-            icon={Users}
-            title="Curated Community"
-            description="Connect with founders who have been in the trenches for 3+ years. A network of peers in fashion, beauty, wellness, and home goods."
+            icon={Layout}
+            title="E-commerce Optimization"
+            description="A pretty website is useless if it doesn't convert. We build high-converting storefronts designed to move units, not just look good."
           />
           <SpotlightCard
             index={2}
-            icon={Zap}
-            title="Capital & Tools"
-            description="Access to the tools, knowledge, and potential capital networks needed to grow without the confusion that typically plagues entrepreneurship."
+            icon={RefreshCw}
+            title="The Barter Economy"
+            description="Cash flow is the #1 killer. Trade what you have (product) for what you need (photography, accounting) within our trusted network. Keep your cash for inventory."
+          />
+          <SpotlightCard
+            index={3}
+            icon={MessageCircle}
+            title="Group Therapy"
+            description="Building a brand is lonely. We provide structured, safe spaces to unpack the mental toll of entrepreneurship. We treat your mental health as a critical business asset."
+          />
+          <SpotlightCard
+            index={4}
+            icon={Store}
+            title="Brand Activation"
+            description="You can't smell a candle or taste a sauce through Instagram. We leverage our network to get your product into customers' hands—from sampling stations to pop-ups."
+          />
+          <SpotlightCard
+            index={5}
+            icon={Users}
+            title="Community Accountability"
+            description="Iron sharpens iron. Connect with serious founders who are actually building. Share vendor contacts, grant opportunities, and real-time market insights."
           />
         </div>
       </div>

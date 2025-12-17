@@ -42,34 +42,56 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-12 w-full md:w-auto mt-8 md:mt-0">
-          <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-4">Platform</h4>
-            <ul className="space-y-2 text-sm text-white/60">
-              <li><button onClick={(e) => handleNav(e, '/', 'hero')} className="hover:text-brand-orange transition-colors text-left w-full">Home</button></li>
-              <li><Link to="/about" onClick={() => window.scrollTo(0, 0)} className="hover:text-brand-orange transition-colors text-left w-full block">About</Link></li>
-              <li><Link to="/eligibility" onClick={() => window.scrollTo(0, 0)} className="hover:text-brand-orange transition-colors text-left w-full block">Eligibility</Link></li>
-            </ul>
+        <div className="flex flex-col lg:flex-row gap-12 w-full md:w-auto mt-8 md:mt-0">
+
+          {/* Links Section */}
+          <div className="flex gap-12">
+            <div>
+              <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-4">Platform</h4>
+              <ul className="space-y-2 text-sm text-white/60">
+                <li><button onClick={(e) => handleNav(e, '/', 'hero')} className="hover:text-brand-orange transition-colors text-left w-full">Home</button></li>
+                <li><Link to="/about" onClick={() => window.scrollTo(0, 0)} className="hover:text-brand-orange transition-colors text-left w-full block">About</Link></li>
+                <li><Link to="/eligibility" onClick={() => window.scrollTo(0, 0)} className="hover:text-brand-orange transition-colors text-left w-full block">Eligibility</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-4">Connect</h4>
+              <ul className="space-y-2 text-sm text-white/60">
+                <li>
+                  <a href="https://www.linkedin.com/company/soplugged/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-orange transition-colors flex items-center gap-2">
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/soplugged/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-orange transition-colors flex items-center gap-2">
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <Link to="/contact" onClick={() => window.scrollTo(0, 0)} className="hover:text-brand-orange transition-colors text-left w-full block">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-4">Connect</h4>
-            <ul className="space-y-2 text-sm text-white/60">
-              <li>
-                <a href="https://www.linkedin.com/company/soplugged/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-orange transition-colors flex items-center gap-2">
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a href="https://www.instagram.com/soplugged/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-orange transition-colors flex items-center gap-2">
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <Link to="/contact" onClick={() => window.scrollTo(0, 0)} className="hover:text-brand-orange transition-colors text-left w-full block">
-                  Contact
-                </Link>
-              </li>
-            </ul>
+
+          {/* Newsletter Section */}
+          <div className="max-w-xs">
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-4">Stay in the Loop</h4>
+            <p className="text-sm text-white/50 mb-4">
+              Get the latest updates on grant opportunities and community events.
+            </p>
+            <form className="flex border-b border-white/20 pb-2 focus-within:border-brand-orange transition-colors" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="bg-transparent border-none outline-none text-white text-sm w-full placeholder:text-white/20"
+              />
+              <button className="text-brand-orange hover:text-white transition-colors uppercase text-xs font-bold tracking-widest">
+                Join
+              </button>
+            </form>
           </div>
         </div>
       </div>
