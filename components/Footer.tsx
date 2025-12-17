@@ -34,13 +34,13 @@ export const Footer: React.FC = () => {
     setStatus('submitting');
 
     try {
-      const params = new URLSearchParams();
-      params.append('email', email);
+      // Robustness: Send data as query params to avoid body parsing issues
+      const targetUrl = new URL(GOOGLE_SCRIPT_URL);
+      targetUrl.searchParams.append('email', email);
+      targetUrl.searchParams.append('timestamp', new Date().toISOString());
 
-      // mode: 'no-cors' is required for Google Apps Script to work publicly
-      await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(targetUrl.toString(), {
         method: 'POST',
-        body: params,
         mode: 'no-cors'
       });
 
