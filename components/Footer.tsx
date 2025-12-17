@@ -3,7 +3,7 @@ import { Mail, MapPin, Instagram, Linkedin, Check, Loader2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom';
 
 // TODO: User must set this URL from the Setup Guide
-const GOOGLE_SCRIPT_URL = "YOUR_SCRIPT_URL_HERE";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXK04DLMCDUgDSy96vNKMcRQZY2yh-_yPD9dNQ0AuLN1jVxDO-xQL7t1wMZJAfYtGX/exec";
 
 export const Footer: React.FC = () => {
   const navigate = useNavigate();
