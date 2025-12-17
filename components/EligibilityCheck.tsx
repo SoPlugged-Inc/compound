@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Clock, FileSearch, CreditCard } from 'lucide-react';
 
 // Custom Brand Icon (Sharp Directional Arrow)
 const CompoundIcon = ({ className }: { className?: string }) => (
@@ -46,24 +46,38 @@ export const EligibilityCheck: React.FC = () => {
                     </motion.div>
                     <h2 className="font-display font-bold text-3xl md:text-5xl mb-8">Ready to Compound?</h2>
 
-                    <div className="max-w-2xl mx-auto mb-10 text-left">
-                        <div className="space-y-4">
-                            <div className="flex gap-4 items-start bg-white/5 p-4 rounded-lg border border-white/5">
-                                <CheckCircle className="w-6 h-6 text-brand-orange flex-shrink-0 mt-0.5" />
-                                <p className="text-white/80 text-sm md:text-base font-light">
-                                    You'll need about 4 minutes and a link to your active website or business Instagram.
+                    <div className="max-w-5xl mx-auto mb-16">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                            {/* Step 1 */}
+                            <div className="flex flex-col items-center group">
+                                <div className="w-12 h-12 rounded-full bg-brand-orange/10 flex items-center justify-center mb-4 group-hover:bg-brand-orange/20 transition-colors">
+                                    <Clock className="w-6 h-6 text-brand-orange" />
+                                </div>
+                                <h3 className="text-white font-bold text-lg mb-2">4 Minutes</h3>
+                                <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+                                    You'll need a link to your active website or business Instagram.
                                 </p>
                             </div>
-                            <div className="flex gap-4 items-start bg-white/5 p-4 rounded-lg border border-white/5">
-                                <CheckCircle className="w-6 h-6 text-brand-orange flex-shrink-0 mt-0.5" />
-                                <p className="text-white/80 text-sm md:text-base font-light">
-                                    We review every submission personally. Incomplete applications will be skipped.
+
+                            {/* Step 2 */}
+                            <div className="flex flex-col items-center group">
+                                <div className="w-12 h-12 rounded-full bg-brand-orange/10 flex items-center justify-center mb-4 group-hover:bg-brand-orange/20 transition-colors">
+                                    <FileSearch className="w-6 h-6 text-brand-orange" />
+                                </div>
+                                <h3 className="text-white font-bold text-lg mb-2">Human Reivew</h3>
+                                <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+                                    We review every submission personally. Incomplete apps are skipped.
                                 </p>
                             </div>
-                            <div className="flex gap-4 items-start bg-white/5 p-4 rounded-lg border border-white/5">
-                                <CheckCircle className="w-6 h-6 text-brand-orange flex-shrink-0 mt-0.5" />
-                                <p className="text-white/80 text-sm md:text-base font-light">
-                                    Membership is <strong className="text-white"> $250 CAD/year</strong>. We do not take equity or charge hidden fees.
+
+                            {/* Step 3 */}
+                            <div className="flex flex-col items-center group">
+                                <div className="w-12 h-12 rounded-full bg-brand-orange/10 flex items-center justify-center mb-4 group-hover:bg-brand-orange/20 transition-colors">
+                                    <CreditCard className="w-6 h-6 text-brand-orange" />
+                                </div>
+                                <h3 className="text-white font-bold text-lg mb-2">$250 CAD / year</h3>
+                                <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+                                    No equity taken. No hidden fees. Just pure value.
                                 </p>
                             </div>
                         </div>
