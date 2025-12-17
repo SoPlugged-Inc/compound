@@ -2,17 +2,25 @@
 title: Welcome to Compound
 date: 2025-12-21
 author: Nina Barango
-description: We're excited to announce the launch of our new blog.
+description: "Five Years In: A Rebirth I Didn’t See Coming"
 cover_image: /media/placeholder.jpg
 ---
-# Welcome to the Compound Blog
+When I started [SoPlugged](soplugged.com) in 2020, I didn’t have a grand plan. I had a spreadsheet, a growing list of Black-owned businesses, and an urgency that came from watching too many entrepreneurs struggle in silence. I thought if I could make them easier to find—if discovery wasn’t such a barrier—perhaps something small but meaningful might shift. What I didn’t expect was that the “something small” would turn into five years of building spaces, markets, programs, networks and, ultimately, a completely new understanding of what our community actually needed from me.
 
-This is the start of something new. We will be sharing updates, stories, and insights from our journey.
+A lot can change in five years. Cities, seasons, priorities. But the one thing that stayed constant was the gap I kept encountering: visibility alone wasn’t enough. Even as SoPlugged grew—250+ businesses connected, thousands of people cycling through our ecosystem, events that consistently sold out—I noticed a pattern I couldn’t ignore. People weren’t asking for a directory; they were asking for direction. They were looking for stability, customers, structure, and access. They were building real companies without the benefit of real infrastructure. There’s something sobering about reaching a milestone and realizing you’ve outgrown the very thing you built. SoPlugged was a spark. It helped bring people together, it opened doors, and it made the path feel less lonely. But sparks are temporary by design; they illuminate just long enough to show you the next thing that needs to exist.
 
-## What to expect
+For us, that next thing became painfully clear over the last two years. Markets and meetups were moving businesses forward—some vendors generated thousands in a single day, many secured wholesale interest, others saw measurable upticks in recurring customers—but the progress wasn’t sustained. People needed more than momentum. They needed a system. I think one of the quiet truths about entrepreneurship, especially in our community, is that we are often expected to turn improvisation into strategy. We build what we can with what we have, and somehow the world assumes that the ability to stretch is the same thing as having support. It isn’t. And no amount of passion or resilience can replace what isn’t structurally there.
 
-*   **Stories** from our community
-*   **Updates** on our progress
-*   **Insights** into the industry
+By late 2024, I started asking myself questions I had avoided for years. If I took away the events, the directory, the social media posts—what was SoPlugged actually trying to solve? And was it solving it? It took me a long time to admit that the answer was complicated. We were helping, yes. But we weren’t intervening at the level that actually moves a business from “holding on” to “scaling up.” We were illuminating pathways that still required too much luck to walk.
 
-Stay tuned!
+That realization shifted everything. Slowly at first, then all at once.
+
+This past year became an exercise in honesty: about our impact, our limitations, and our potential. The questions got bigger. The stakes got higher. And the next version of SoPlugged—the one I once imagined would simply be an improved directory—revealed itself as something entirely different. Not a listing platform. Not an events company. Not a community hub. Something more ambitious and far more necessary.
+
+That is how Compound was born. A new operating system for how we support Black-owned consumer brands. It is the infrastructure that was missing when I started SoPlugged, and the framework I wish existed for the entrepreneurs we met along the way. It is the acknowledgment that visibility alone isn’t enough, and that talent shouldn’t be asked to compensate for structural gaps. It’s clearer than ever that Black-owned consumer brands don’t need louder encouragement; they need access, data, pathways, and partners who understand the reality of growing a business with limited margins and even more limited safety nets. For the first time, we are pairing community with capital, matching founders with customers in a sustained way, and building the kind of support engine that removes luck from the equation.
+
+As I look back at the last five years, I don’t see a straight line leading to Compound. I see a series of necessary steps—some intentional, some accidental, all of them pushing us toward this moment. SoPlugged taught me how to listen closely, build carefully, and let go when something has outlived its purpose. It showed me what’s possible when people believe in you before the infrastructure does. And it showed me that evolution isn’t always glamorous; sometimes it looks like admitting that the work requires a different form than the one you’ve mastered.
+
+This next chapter feels heavier, but in the way that responsibility always does. It’s bigger, clearer, and sharper than anything I’ve built before. Five years in, it feels less like an ending and more like the moment you finally catch up to the thing you were always building toward—quietly, stubbornly, and often without realizing it.
+
+And this time, we’re building with the full weight of the vision in mind.
